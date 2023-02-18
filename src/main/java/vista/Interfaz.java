@@ -14,7 +14,7 @@ import interfaces.IDireccionesDAO;
 
 /**
  *
- * @author Zaurus
+ * @author Ángel Valenzuela, Luis Ayón
  */
 public class Interfaz extends javax.swing.JFrame {
     private IClientesDAO clientesDAO;

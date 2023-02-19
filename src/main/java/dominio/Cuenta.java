@@ -18,6 +18,14 @@ public class Cuenta {
 
     public Cuenta(){}
 
+    public Cuenta(Integer idCliente, Float saldo, String numeroCuenta, String nombre, String estado) {
+        this.idCliente = idCliente;
+        this.saldo = saldo;
+        this.numeroCuenta = numeroCuenta;
+        this.nombre = nombre;
+        this.estado = estado;
+    }
+
     public Cuenta(Integer idCliente, Float saldo, String numeroCuenta, String nombre, String fechaApertura, String estado) {
         this.idCliente = idCliente;
         this.saldo = saldo;

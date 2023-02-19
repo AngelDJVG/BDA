@@ -52,9 +52,6 @@ public class ClientesForm extends javax.swing.JFrame {
                 Direccion direccionGuardado = this.direccionesDAO.insertar(direccion);
 
                 Cliente cliente = extraerDatosFormulario(direccionGuardado.getId());
-                /*
-                TODO: VALIDAR
-                 */
                 Cliente clienteGuardado = this.clientesDAO.insertar(cliente);
 
                 this.mostrarMensajeClienteGuardado(clienteGuardado);

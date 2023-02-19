@@ -8,9 +8,11 @@ package Presentacion;
 import dominio.Cliente;
 import implementaciones.ClientesDAO;
 import implementaciones.ConexionBD;
+import implementaciones.CuentasDAO;
 import implementaciones.DireccionesDAO;
 import interfaces.IClientesDAO;
 import interfaces.IConexionBD;
+import interfaces.ICuentaDAO;
 import interfaces.IDireccionesDAO;
 
 /**
@@ -22,11 +24,14 @@ public class MenuForm extends javax.swing.JFrame {
     private IDireccionesDAO direccionesDAO;
     private IConexionBD generadorConexiones;
     private Cliente cliente;
+    private ICuentaDAO cuentasDAO;
     /**
      * Creates new form Interfaz
      */
     public MenuForm(Cliente cliente) {
+        generadorConexiones = new ConexionBD( "jdbc:mysql://localhost/banco", "root", "luispablo11");
         clientesDAO = new ClientesDAO(generadorConexiones);
+        cuentasDAO = new CuentasDAO(generadorConexiones);
         this.cliente = cliente;
         initComponents();
         
@@ -167,7 +172,7 @@ public class MenuForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new LoginForm(clientesDAO).setVisible(true);
+        new CuentasForm(cuentasDAO,cliente).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 

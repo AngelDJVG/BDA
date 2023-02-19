@@ -10,8 +10,8 @@ import java.util.*;
  *GeneradorClaves
  * @author Zaurus
  */
-class GeneradorClaves {
-    static String getRandomString(int i) 
+public class GeneradorClaves {
+    public static String getRandomString(int i) 
     {
     
         // bind the length 

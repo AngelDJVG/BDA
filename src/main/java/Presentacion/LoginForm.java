@@ -5,12 +5,14 @@
  */
 package Presentacion;
 
+import Excepciones.PersistenciaException;
 import Utilidades.ConfiguracionPaginado;
 import Utilidades.Validadores;
 import dominio.Cliente;
 import interfaces.IClientesDAO;
 import interfaces.IDireccionesDAO;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,12 +31,19 @@ public class LoginForm extends javax.swing.JFrame {
     }
     private void acreeditarCredenciales()
     {
-        Cliente cliente = clientesDAO.consultar(Integer.parseInt(txtNumeroRegistro.getText()));
-        if(cliente.getContrasena().equals(txtContrasena.getText()))
-        {
-            new MenuForm(cliente).setVisible(true);
-            dispose();
+        try{
+            Cliente cliente = clientesDAO.consultar(Integer.valueOf(txtNumeroRegistro.getText()));
+            if(cliente.getContrasena().equals(txtContrasena.getText()))
+            {
+                new MenuForm(cliente).setVisible(true);
+                dispose();
+            }
         }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Las creedenciales no son existentes");
+        }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.

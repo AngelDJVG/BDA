@@ -41,18 +41,17 @@ public class CuentasDAO implements ICuentaDAO {
         try{
         Connection conexion = this.GENERADOR_CONEXIONES.crearConexion();
         PreparedStatement comando = 
-                conexion.prepareStatement("select nombre, apellidopaterno, apellidomaterno,codigodireccion,fechaNacimiento,contrasena from cuentas WHERE numerocuenta=?");
+                conexion.prepareStatement("select nombre,fechaApertura,saldo,estado,codigoCliente from cuentas WHERE numerocuenta=?");
         comando.setString(1, numeroCuenta);
         ResultSet resultado = comando.executeQuery();
         Cuenta cuenta = null;
         if(resultado.next()) {
             String nombre = resultado.getString("nombre");
-            String apellido_paterno = resultado.getString("apellidopaterno");
-            String apellido_materno = resultado.getString("apellidomaterno");
-            String contrasena = resultado.getString("contrasena");
-            String fechaNacimiento = resultado.getString("fechanacimiento");
-            Integer id_direccion = resultado.getInt("codigodireccion");
-            cuenta = new Cuenta();
+            String fechaApertura = resultado.getString("fechaApertura");
+            Float saldo = resultado.getFloat("saldo");
+            String estado = resultado.getString("estado");
+            Integer codigoCliente = resultado.getInt("codigoCliente");
+            cuenta = new Cuenta(codigoCliente, saldo, numeroCuenta, nombre, fechaApertura, estado);
         }
         conexion.close();
         return cuenta;
@@ -68,25 +67,24 @@ public class CuentasDAO implements ICuentaDAO {
         try(
             Connection conexion = this.GENERADOR_CONEXIONES.crearConexion();
             PreparedStatement comando = conexion.prepareStatement("insert into cuentas(numerocuenta,nombre, "
-            + "fechaapertura,saldo,estado,codigocliente)"
-            + "values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            + "saldo,estado,codigocliente)"
+            + "values(?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
             ){
             comando.setString(1, cuenta.getNumeroCuenta());
             comando.setString(2, cuenta.getNombre());
-            comando.setString(3, cuenta.getFechaApertura());
-            comando.setFloat(4, cuenta.getSaldo());
-            comando.setString(5, cuenta.getEstado());
-            comando.setInt(6, cuenta.getIdCliente());
+            comando.setFloat(3, cuenta.getSaldo());
+            comando.setString(4, cuenta.getEstado());
+            comando.setInt(5, cuenta.getIdCliente());
             comando.executeUpdate();
             System.out.println("Cuenta creada");
             ResultSet llaves = comando.getGeneratedKeys();
             if(llaves.next()){
                 int posicionLlavePrimaria = 1;
-                Integer id = llaves.getInt(posicionLlavePrimaria);
+                String s = llaves.getString(posicionLlavePrimaria);
 
                 return cuenta;
             }
-            throw new PersistenciaException("No fue posible registrar una cuenta");
+            return cuenta;
         }catch(SQLException ex){
             LOG.log(Level.SEVERE, ex.getMessage());
             throw new PersistenciaException("No fue posible registrar una cuenta");
@@ -116,28 +114,27 @@ public class CuentasDAO implements ICuentaDAO {
     }
 
     @Override
-    public List<Cuenta> consultar(ConfiguracionPaginado configPaginado) throws PersistenciaException {
+    public List<Cuenta> consultar(Integer idCliente) throws PersistenciaException {
         List<Cuenta> listaCuentas = new LinkedList<>();
         try{
         Connection conexion = this.GENERADOR_CONEXIONES.crearConexion();
         PreparedStatement comando = 
                 conexion.prepareStatement("select cuentas.numeroCuenta,cuentas.nombre,cuentas.fechaApertura,cuentas.saldo,cuentas.estado,clientes.codigo from cuentas\n" +
                                           "inner join Clientes ON cuentas.codigoCliente = Clientes.codigo\n" +
-                                          "having Clientes.codigo = ? limit ? offset ?;");
-        comando.setInt(1, configPaginado.getElementosPorPagina());
-        comando.setInt(2, configPaginado.getElementosSaltar());
-        
+                                          "having Clientes.codigo = ? ;");
+        comando.setInt(1, idCliente);
         ResultSet resultado = comando.executeQuery();
-        Cuenta cliente = null;
+        Cuenta cuenta = null;
         while(resultado.next()) 
         {
-            Integer id_cliente = resultado.getInt("id_cliente");
-            String nombre = resultado.getString("nombre");
-            String apellido_paterno = resultado.getString("apellido_paterno");
-            String apellido_materno = resultado.getString("apellido_materno");
-            Integer id_direccion = resultado.getInt("id_direccion");
+            String numeroCuenta = resultado.getString("cuentas.numeroCuenta");
+            String nombre = resultado.getString("cuentas.nombre");
+            String fechaApertura = resultado.getString("cuentas.fechaApertura");
+            Float saldo = resultado.getFloat("cuentas.saldo");
+            String estado = resultado.getString("cuentas.estado");
+            cuenta = new Cuenta(idCliente, saldo, numeroCuenta, nombre, fechaApertura, estado);
             //cliente = new Cliente(id_cliente, id_direccion, nombre, apellido_paterno, apellido_materno);
-            listaCuentas.add(cliente);
+            listaCuentas.add(cuenta);
         }
         conexion.close();
         return listaCuentas;

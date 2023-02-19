@@ -23,11 +23,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lv1013
  */
-public class CuentasForm extends javax.swing.JFrame {
-    private static final Logger LOG = Logger.getLogger(CuentasForm.class.getName());
+public class RetiroSinCuentaForm extends javax.swing.JFrame {
+    private static final Logger LOG = Logger.getLogger(RetiroSinCuentaForm.class.getName());
     private ICuentaDAO cuentaDAO;
     private Cliente cliente;
-    public CuentasForm(ICuentaDAO cuentasDAO,Cliente cliente) {    
+    public RetiroSinCuentaForm(ICuentaDAO cuentasDAO,Cliente cliente) {    
         this.cuentaDAO = cuentasDAO;
         this.cliente= cliente;
         initComponents();
@@ -88,13 +88,15 @@ public class CuentasForm extends javax.swing.JFrame {
         lblSaldo.setBackground(new java.awt.Color(0, 102, 102));
         lblSaldo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblSaldo.setForeground(new java.awt.Color(255, 255, 255));
-        lblSaldo.setText("               Saldo");
+        lblSaldo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSaldo.setText("Saldo");
         lblSaldo.setOpaque(true);
 
         lblNombre.setBackground(new java.awt.Color(0, 102, 102));
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("      Nombre - Descripcion");
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombre.setText("Nombre - Descripcion");
         lblNombre.setOpaque(true);
 
         btnGuardar.setText("Guardar");
@@ -111,7 +113,8 @@ public class CuentasForm extends javax.swing.JFrame {
         lblTitulo.setBackground(new java.awt.Color(0, 102, 102));
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("                            Cuentas");
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Generar retiro sin cuenta");
         lblTitulo.setOpaque(true);
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {

@@ -25,7 +25,6 @@ public class CuentasForm extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(CuentasForm.class.getName());
 
     public CuentasForm(IClientesDAO clientesDAO) {    
-
         initComponents();
         
     }

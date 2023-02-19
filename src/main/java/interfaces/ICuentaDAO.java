@@ -20,5 +20,5 @@ public interface ICuentaDAO {
     Cuenta consultar(String numeroCuenta);
     Cuenta insertar(Cuenta cuenta)throws PersistenciaException;
     Cuenta eliminar(String numeroCuenta);
-    List<Cuenta> consultar(ConfiguracionPaginado configPaginado) throws PersistenciaException;
+    List<Cuenta> consultar(Integer id) throws PersistenciaException;
 }

@@ -116,28 +116,27 @@ public class CuentasDAO implements ICuentaDAO {
     }
 
     @Override
-    public List<Cuenta> consultar(ConfiguracionPaginado configPaginado) throws PersistenciaException {
+    public List<Cuenta> consultar(Integer idCliente) throws PersistenciaException {
         List<Cuenta> listaCuentas = new LinkedList<>();
         try{
         Connection conexion = this.GENERADOR_CONEXIONES.crearConexion();
         PreparedStatement comando = 
                 conexion.prepareStatement("select cuentas.numeroCuenta,cuentas.nombre,cuentas.fechaApertura,cuentas.saldo,cuentas.estado,clientes.codigo from cuentas\n" +
                                           "inner join Clientes ON cuentas.codigoCliente = Clientes.codigo\n" +
-                                          "having Clientes.codigo = ? limit ? offset ?;");
-        comando.setInt(1, configPaginado.getElementosPorPagina());
-        comando.setInt(2, configPaginado.getElementosSaltar());
-        
+                                          "having Clientes.codigo = ? ;");
+        comando.setInt(1, idCliente);
         ResultSet resultado = comando.executeQuery();
-        Cuenta cliente = null;
+        Cuenta cuenta = null;
         while(resultado.next()) 
         {
-            Integer id_cliente = resultado.getInt("id_cliente");
-            String nombre = resultado.getString("nombre");
-            String apellido_paterno = resultado.getString("apellido_paterno");
-            String apellido_materno = resultado.getString("apellido_materno");
-            Integer id_direccion = resultado.getInt("id_direccion");
+            String numeroCuenta = resultado.getString("cuentas.numeroCuenta");
+            String nombre = resultado.getString("cuentas.nombre");
+            String fechaApertura = resultado.getString("cuentas.fechaApertura");
+            Float saldo = resultado.getFloat("cuentas.saldo");
+            String estado = resultado.getString("cuentas.estado");
+            cuenta = new Cuenta(idCliente, saldo, numeroCuenta, nombre, fechaApertura, estado);
             //cliente = new Cliente(id_cliente, id_direccion, nombre, apellido_paterno, apellido_materno);
-            listaCuentas.add(cliente);
+            listaCuentas.add(cuenta);
         }
         conexion.close();
         return listaCuentas;

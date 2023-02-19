@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author lv1013
+ * @author Ángel Valenzuela, Luis Ayón
  */
 public interface IClientesDAO {
     

@@ -10,6 +10,7 @@ import Utilidades.ConfiguracionPaginado;
 import Utilidades.Validadores;
 import dominio.Cliente;
 import interfaces.IClientesDAO;
+import interfaces.IConexionBD;
 import interfaces.IDireccionesDAO;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,17 +21,20 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JFrame {
     private final IClientesDAO clientesDAO;
+    private IConexionBD generadorConexiones;
     private final Validadores validadores = new Validadores();
     private static final Logger LOG = Logger.getLogger(ClientesForm.class.getName());
     /**
      * Creates new form Registro_Login
      */
-    public LoginForm(IClientesDAO clientesDAO) {
+    public LoginForm(IClientesDAO clientesDAO, IConexionBD generadorConexiones) {
         this.clientesDAO = clientesDAO;
         initComponents();
+        this.generadorConexiones = generadorConexiones;
     }
     private void acreeditarCredenciales()
     {
+
         try{
             Cliente cliente = clientesDAO.consultar(Integer.valueOf(txtNumeroRegistro.getText()));
             if(cliente.getContrasena().equals(txtContrasena.getText()))
@@ -38,6 +42,13 @@ public class LoginForm extends javax.swing.JFrame {
                 new MenuForm(cliente).setVisible(true);
                 dispose();
             }
+        Cliente cliente = clientesDAO.consultar(Integer.parseInt(txtNumeroRegistro.getText()));
+        if(cliente.getContrasena().equals(txtContrasena.getText()))
+        {
+            new MenuForm(cliente, generadorConexiones).setVisible(true);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "No existe el cliente");
         }
         catch(Exception e)
         {

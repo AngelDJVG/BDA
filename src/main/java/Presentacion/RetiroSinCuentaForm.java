@@ -76,7 +76,7 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        spSaldo = new javax.swing.JSpinner();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clientes");
@@ -89,7 +89,7 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
         lblSaldo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblSaldo.setForeground(new java.awt.Color(255, 255, 255));
         lblSaldo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSaldo.setText("Saldo");
+        lblSaldo.setText("Cuenta");
         lblSaldo.setOpaque(true);
 
         lblNombre.setBackground(new java.awt.Color(0, 102, 102));
@@ -123,8 +123,7 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
             }
         });
 
-        spSaldo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        spSaldo.setModel(new javax.swing.SpinnerNumberModel(500.0f, 500.0f, null, 1.0f));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
@@ -145,7 +144,7 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombre)
-                            .addComponent(spSaldo))))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnlFondoLayout.setVerticalGroup(
@@ -155,8 +154,8 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jComboBox1))
                 .addGap(29, 29, 29)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,11 +197,11 @@ public class RetiroSinCuentaForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlFondo;
-    private javax.swing.JSpinner spSaldo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

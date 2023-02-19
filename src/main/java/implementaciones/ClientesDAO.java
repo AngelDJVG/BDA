@@ -102,6 +102,7 @@ public class ClientesDAO implements IClientesDAO {
         PreparedStatement comando = 
                 conexion.prepareStatement("delete from clientes where id=?");
         comando.setInt(1, idCliente);
+        
         clienteEliminado = this.consultar(idCliente);
         int numeroClientesEliminados = comando.executeUpdate();
         

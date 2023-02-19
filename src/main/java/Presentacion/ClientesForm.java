@@ -28,6 +28,7 @@ public class ClientesForm extends javax.swing.JFrame {
     private final IClientesDAO clientesDAO;
     private final IDireccionesDAO direccionesDAO;
     private final Validadores validadores = new Validadores();
+    
     private static final Logger LOG = Logger.getLogger(ClientesForm.class.getName());
 
     /**
@@ -38,7 +39,7 @@ public class ClientesForm extends javax.swing.JFrame {
         this.clientesDAO = clientesDAO;
         this.direccionesDAO = direccionesDAO;
         initComponents();
-
+        
     }
 
     private void guardar() {

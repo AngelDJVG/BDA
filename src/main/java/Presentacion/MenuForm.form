@@ -49,9 +49,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnLogin" max="32767" attributes="0"/>
-                      <Component id="btnRegistrar" max="32767" attributes="0"/>
-                      <Component id="btnCancelar1" alignment="0" min="-2" pref="430" max="-2" attributes="0"/>
+                      <Component id="btnNewCuenta" max="32767" attributes="0"/>
+                      <Component id="btnTransferencia" max="32767" attributes="0"/>
+                      <Component id="btnRetiro" alignment="0" min="-2" pref="430" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -73,11 +73,11 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="btnLogin" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="btnNewCuenta" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="btnRegistrar" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="btnTransferencia" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btnCancelar1" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="btnRetiro" min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -93,7 +93,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnLogin">
+        <Component class="javax.swing.JButton" name="btnNewCuenta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="0"/>
@@ -106,10 +106,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewCuentaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegistrar">
+        <Component class="javax.swing.JButton" name="btnTransferencia">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="0"/>
@@ -122,10 +122,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransferenciaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCancelar1">
+        <Component class="javax.swing.JButton" name="btnRetiro">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="24" style="0"/>
@@ -138,7 +138,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelar1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRetiroActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -198,7 +198,9 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="GiBrank"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="cliente.getNombre()" type="code"/>
+            </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>

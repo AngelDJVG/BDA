@@ -30,6 +30,7 @@ public class CuentasForm extends javax.swing.JFrame {
     public CuentasForm(ICuentaDAO cuentasDAO,Cliente cliente) {    
         this.cuentaDAO = cuentasDAO;
         this.cliente= cliente;
+
         initComponents();
         
     }

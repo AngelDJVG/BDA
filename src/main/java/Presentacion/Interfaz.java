@@ -7,9 +7,12 @@ package Presentacion;
 
 import implementaciones.ClientesDAO;
 import implementaciones.ConexionBD;
+import implementaciones.CuentasDAO;
+
 import implementaciones.DireccionesDAO;
 import interfaces.IClientesDAO;
 import interfaces.IConexionBD;
+import interfaces.ICuentaDAO;
 import interfaces.IDireccionesDAO;
 
 /**
@@ -20,13 +23,15 @@ public class Interfaz extends javax.swing.JFrame {
     private IClientesDAO clientesDAO;
     private IDireccionesDAO direccionesDAO;
     private IConexionBD generadorConexiones;
+    private ICuentaDAO cuentasDAO;
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
-        generadorConexiones = new ConexionBD( "jdbc:mysql://localhost/banco", "root", "luispablo11");
+        generadorConexiones = new ConexionBD( "jdbc:mysql://localhost/banco", "root", "valenzuela10");
         clientesDAO = new ClientesDAO(generadorConexiones);
         direccionesDAO = new DireccionesDAO(generadorConexiones);
+        cuentasDAO = new CuentasDAO(generadorConexiones);
         initComponents();
     }
 
@@ -132,7 +137,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new LoginForm(clientesDAO).setVisible(true);
+        new LoginForm(clientesDAO,generadorConexiones).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 

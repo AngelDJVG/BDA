@@ -10,10 +10,12 @@ import implementaciones.ClientesDAO;
 import implementaciones.ConexionBD;
 import implementaciones.CuentasDAO;
 import implementaciones.DireccionesDAO;
+import implementaciones.TransaccionDAO;
 import interfaces.IClientesDAO;
 import interfaces.IConexionBD;
 import interfaces.ICuentaDAO;
 import interfaces.IDireccionesDAO;
+import interfaces.ITransaccionDAO;
 
 /**
  *
@@ -22,15 +24,21 @@ import interfaces.IDireccionesDAO;
 public class MenuForm extends javax.swing.JFrame {
     private IClientesDAO clientesDAO;
     private IDireccionesDAO direccionesDAO;
+    private ICuentaDAO cuentasDAO;
     private IConexionBD generadorConexiones;
     private Cliente cliente;
-    private ICuentaDAO cuentasDAO;
+
+    private ITransaccionDAO transaccionDAO;
+
     /**
      * Creates new form Interfaz
+     * @param cliente
      */
+
     public MenuForm(Cliente cliente) {
         generadorConexiones = new ConexionBD( "jdbc:mysql://localhost/banco", "root", "luispablo11");
         clientesDAO = new ClientesDAO(generadorConexiones);
+        transaccionDAO = new TransaccionDAO(generadorConexiones);
         cuentasDAO = new CuentasDAO(generadorConexiones);
         this.cliente = cliente;
         initComponents();
@@ -47,9 +55,9 @@ public class MenuForm extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
-        btnLogin = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
-        btnCancelar1 = new javax.swing.JButton();
+        btnNewCuenta = new javax.swing.JButton();
+        btnTransferencia = new javax.swing.JButton();
+        btnRetiro = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblDescripcion = new javax.swing.JLabel();
         lblTitulo1 = new javax.swing.JLabel();
@@ -59,30 +67,30 @@ public class MenuForm extends javax.swing.JFrame {
         pnlFondo.setBackground(new java.awt.Color(0, 204, 204));
         pnlFondo.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnLogin.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnLogin.setText("Añadir cuenta");
-        btnLogin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnNewCuenta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnNewCuenta.setText("Añadir cuenta");
+        btnNewCuenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNewCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnNewCuentaActionPerformed(evt);
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnRegistrar.setText("Transferencia");
-        btnRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnTransferencia.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnTransferencia.setText("Transferencia");
+        btnTransferencia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnTransferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                btnTransferenciaActionPerformed(evt);
             }
         });
 
-        btnCancelar1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnCancelar1.setText("Retiro");
-        btnCancelar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
+        btnRetiro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnRetiro.setText("Retiro");
+        btnRetiro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRetiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelar1ActionPerformed(evt);
+                btnRetiroActionPerformed(evt);
             }
         });
 
@@ -114,7 +122,7 @@ public class MenuForm extends javax.swing.JFrame {
         lblTitulo1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         lblTitulo1.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo1.setText("GiBrank");
+        lblTitulo1.setText(cliente.getNombre());
         lblTitulo1.setOpaque(true);
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
@@ -124,9 +132,9 @@ public class MenuForm extends javax.swing.JFrame {
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNewCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTransferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -143,11 +151,11 @@ public class MenuForm extends javax.swing.JFrame {
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNewCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlFondoLayout.createSequentialGroup()
@@ -176,20 +184,25 @@ public class MenuForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        new ClientesForm(clientesDAO, direccionesDAO).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    private void btnNewCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCuentaActionPerformed
+        
+        
+    }//GEN-LAST:event_btnNewCuentaActionPerformed
 
-    private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
+    private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
+        new TransicionesForm(transaccionDAO,cuentasDAO, cliente).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTransferenciaActionPerformed
+
+    private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelar1ActionPerformed
+    }//GEN-LAST:event_btnRetiroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar1;
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnNewCuenta;
+    private javax.swing.JButton btnRetiro;
+    private javax.swing.JButton btnTransferencia;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblTitulo1;

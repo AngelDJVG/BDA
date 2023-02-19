@@ -108,4 +108,10 @@ public class Cuenta {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return numeroCuenta;
+    }
+
+    
 }
